@@ -165,7 +165,7 @@ export default function RootLayout({
           aria-label="Contact us on WhatsApp"
         >
           <img
-            src="/icons/whatsapp.png"
+            src="/icons/whatsapp.jpg"
             alt="WhatsApp"
             className="w-full h-full rounded-full"
           />

@@ -11,7 +11,6 @@ export default function Navigation() {
     const navLinks = [
         { href: "/", label: "Home" },
         { href: "/#artist-statement", label: "About" },
-        { href: "/#featured-works", label: "Works" },
         { href: "/gallery", label: "Gallery" },
         { href: "/commissions", label: "Order Inquiry" },
     ];
