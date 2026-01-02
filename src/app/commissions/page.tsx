@@ -176,11 +176,10 @@ export default function CommissionsPage() {
                             <Card
                                 key={pkg.id}
                                 onClick={() => setSelectedPackage(pkg.id)}
-                                className={`cursor-pointer transition-all duration-300 hover:shadow-art-hover hover:-translate-y-1 ${
-                                    selectedPackage === pkg.id
+                                className={`cursor-pointer transition-all duration-300 hover:shadow-art-hover hover:-translate-y-1 ${selectedPackage === pkg.id
                                         ? "ring-2 shadow-art-hover"
                                         : ""
-                                }`}
+                                    }`}
                                 style={{
                                     borderColor:
                                         selectedPackage === pkg.id
@@ -453,7 +452,7 @@ export default function CommissionsPage() {
                                             >
                                                 {formData.referenceImages
                                                     ? formData.referenceImages
-                                                          .name
+                                                        .name
                                                     : "Click to upload reference photos"}
                                             </p>
                                             <p
