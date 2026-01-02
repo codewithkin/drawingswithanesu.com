@@ -123,9 +123,9 @@ This message was sent from the Drawings With Anesu website commission form.
                     <div style="margin: 30px 0; padding: 20px; background-color: #FFFFFF; border: 1px solid #D4C5B5;">
                         <h2 style="color: #8B5E3C; font-size: 16px; margin-bottom: 10px;">Your Request Summary:</h2>
                         <p style="color: #1A1A1A; margin: 5px 0;">Package: ${selectedPackage}</p>
-                        <p style="color: #1A1A1A; margin: 5px 0;">Print Type: ${selectedPrin
-                        <p style="color: #1A1A1A; margin: 5px 0; margin-top: 10px; padding-top: 10px; border-top: 1px solid #D4C5B5;"><strong>Estimated Total:</strong> $${totalPrice}</p>t}</p>
+                        <p style="color: #1A1A1A; margin: 5px 0;">Print Type: ${selectedPrint}</p>
                         <p style="color: #1A1A1A; margin: 5px 0;">Subject: ${animalType}</p>
+                        <p style="color: #1A1A1A; margin: 5px 0; margin-top: 10px; padding-top: 10px; border-top: 1px solid #D4C5B5;"><strong>Estimated Total:</strong> $${totalPrice}</p>
                     </div>
                     
                     <p style="color: #8B5E3C; font-style: italic; text-align: center; margin-top: 30px;">
