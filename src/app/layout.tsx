@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | Drawings With Anesu",
   },
   description:
-    "Original wildlife artwork by Anesu Ndangariro — 'With us, Remembrance.' Animals drawn in pairs to reflect the mother-child bond, with deep focus on the eyes, the window to the soul where memory, emotion, and connection live.",
+    "Original wildlife artwork by Anesu Ndangariro. 'With us, Remembrance.' Animals drawn in pairs to reflect the mother-child bond, with deep focus on the eyes where memory, emotion and connection live.",
 
   keywords: [
     "Anesu Ndangariro",

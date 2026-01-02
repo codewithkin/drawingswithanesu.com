@@ -39,11 +39,11 @@ export async function POST(request: NextRequest) {
             from: `"Drawings With Anesu Website" <${process.env.SMTP_USER}>`,
             to: process.env.ANESU_EMAIL || "anesu@drawingswithanesu.com",
             replyTo: email,
-            subject: `New Commission Request: ${animalType} (${selectedPackage})`,
+            subject: `New Order Request: ${animalType} (${selectedPackage})`,
             html: `
                 <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #FAF8F5;">
                     <h1 style="color: #1A1A1A; font-size: 24px; margin-bottom: 20px;">
-                        New Commission Request
+                        New Order Request
                     </h1>
                     
                     <div style="background-color: #FFFFFF; padding: 20px; border: 1px solid #D4C5B5; margin-bottom: 20px;">
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
                     </div>
                     
                     <div style="background-color: #FFFFFF; padding: 20px; border: 1px solid #D4C5B5; margin-bottom: 20px;">
-                        <h2 style="color: #8B5E3C; font-size: 18px; margin-bottom: 15px;">Commission Details</h2>
+                        <h2 style="color: #8B5E3C; font-size: 18px; margin-bottom: 15px;">Order Details</h2>
                         <p style="color: #1A1A1A; margin: 8px 0;"><strong>Package:</strong> ${selectedPackage}</p>
                         <p style="color: #1A1A1A; margin: 8px 0;"><strong>Print Type:</strong> ${selectedPrint}</p>
                         <p style="color: #1A1A1A; margin: 8px 0;"><strong>Subject/Animal:</strong> ${animalType}</p>
@@ -69,20 +69,20 @@ export async function POST(request: NextRequest) {
                     <div style="text-align: center; padding: 20px; color: #8B5E3C; font-style: italic;">
                         <p>"With us, Remembrance"</p>
                         <p style="font-size: 12px; color: #6B6B6B; margin-top: 10px;">
-                            This message was sent from the Drawings With Anesu website commission form.
+                            This message was sent from the Drawings With Anesu website order form.
                         </p>
                     </div>
                 </div>
             `,
             text: `
-New Commission Request
+New Order Request
 
 Client Information:
 - Name: ${name}
 - Email: ${email}
 - Phone: ${phone || "Not provided"}
 
-Commission Details:
+Order Details:
 - Package: ${selectedPackage}
 - Print Type: ${selectedPrint}
 - Subject/Animal: ${animalType}
@@ -92,7 +92,7 @@ Message:
 ${message}
 
 ---
-This message was sent from the Drawings With Anesu website commission form.
+This message was sent from the Drawings With Anesu website order form.
             `,
         };
 
@@ -103,7 +103,7 @@ This message was sent from the Drawings With Anesu website commission form.
         const confirmationMail = {
             from: `"Anesu Ndangariro" <${process.env.SMTP_USER}>`,
             to: email,
-            subject: "Thank you for your commission request - Drawings With Anesu",
+            subject: "Thank you for your order request - Drawings With Anesu",
             html: `
                 <div style="font-family: Georgia, serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #FAF8F5;">
                     <h1 style="color: #1A1A1A; font-size: 24px; margin-bottom: 20px;">
@@ -111,7 +111,7 @@ This message was sent from the Drawings With Anesu website commission form.
                     </h1>
                     
                     <p style="color: #1A1A1A; font-size: 16px; line-height: 1.6;">
-                        I've received your commission request for a <strong>${animalType}</strong> drawing 
+                        I've received your order request for a <strong>${animalType}</strong> drawing 
                         (${selectedPackage} package). Thank you for your interest in my work.
                     </p>
                     
@@ -148,13 +148,13 @@ This message was sent from the Drawings With Anesu website commission form.
         await transporter.sendMail(confirmationMail);
 
         return NextResponse.json(
-            { success: true, message: "Commission request received" },
+            { success: true, message: "Order request received" },
             { status: 200 }
         );
     } catch (error) {
-        console.error("Commission request error:", error);
+        console.error("Order request error:", error);
         return NextResponse.json(
-            { error: "Failed to process commission request. Please try again." },
+            { error: "Failed to process order request. Please try again." },
             { status: 500 }
         );
     }

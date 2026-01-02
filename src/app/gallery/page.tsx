@@ -297,7 +297,7 @@ export default function GalleryPage() {
                                     {selectedArtwork.description}
                                 </div>
 
-                                {/* Commission CTA */}
+                                {/* Order CTA */}
                                 <div className="mt-8 pt-6 border-t border-sand">
                                     <p
                                         className="text-small mb-4"
@@ -313,7 +313,7 @@ export default function GalleryPage() {
                                             color: "var(--cream)",
                                         }}
                                     >
-                                        Commission a Drawing
+                                        Order a Drawing
                                     </Link>
                                 </div>
                             </div>

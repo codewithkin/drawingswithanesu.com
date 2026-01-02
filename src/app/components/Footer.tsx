@@ -38,8 +38,8 @@ export default function Footer() {
                             className="text-small max-w-xs"
                             style={{ color: "var(--sage)" }}
                         >
-                            Wildlife artwork exploring memory, Ubuntu, and the
-                            connections that bind us.
+                            Wildlife artwork exploring memory, Ubuntu and the
+                            connections that bind us
                         </p>
                     </div>
 
@@ -71,7 +71,7 @@ export default function Footer() {
                                 className="block text-body transition-colors duration-300 hover:text-[var(--ochre)]"
                                 style={{ color: "var(--cream)" }}
                             >
-                                Commissions
+                                Orders
                             </Link>
                         </div>
                     </div>
@@ -150,8 +150,8 @@ export default function Footer() {
                             className="text-small"
                             style={{ color: "var(--sage)" }}
                         >
-                            Get in touch to commission a piece or learn more
-                            about the work.
+                            Get in touch to order a piece or learn more
+                            about the work
                         </p>
                     </div>
                 </div>

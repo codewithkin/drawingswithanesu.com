@@ -9,10 +9,10 @@ export default function ProcessSection() {
             <div className="max-w-5xl mx-auto">
                 <div className="text-center mb-12">
                     <h2 className="text-h2 mb-3" style={{ color: "var(--charcoal)" }}>
-                        The Commission Process
+                        The Process
                     </h2>
                     <p className="text-body max-w-2xl mx-auto" style={{ color: "var(--sienna)" }}>
-                        From consultation to delivery, here's how we bring your vision to life.
+                        From consultation to delivery, here's how we bring your vision to life
                     </p>
                 </div>
 

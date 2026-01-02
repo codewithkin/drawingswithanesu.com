@@ -25,7 +25,7 @@ const featuredArtworks = [
         size: "91 × 64 cm",
         image: "/images/artworks/lion-potraut-single-male.jpeg",
         description:
-            "A symbol of majesty and power — a reminder that you are the King of your Castle.",
+            "A symbol of majesty and power. A reminder that you are the King of your Castle.",
     },
     {
         id: 3,
@@ -45,7 +45,7 @@ const featuredArtworks = [
         size: "91 × 64 cm",
         image: "/images/artworks/polarity-high-quality-bears-potrait.jpeg",
         description:
-            "The most intricate drawing — a battlefield between two poles, positive and negative.",
+            "The most intricate drawing. A battlefield between two poles, positive and negative.",
     },
     {
         id: 5,
@@ -55,7 +55,7 @@ const featuredArtworks = [
         size: "60 × 61 cm",
         image: "/images/artworks/africa-in-the-shape-of-african-potraits.jpeg",
         description:
-            "Africa shaped by her wildlife — Victoria Falls, sunsets, and harmonious nature.",
+            "Africa shaped by her wildlife. Victoria Falls, sunsets and harmonious nature.",
     },
     {
         id: 6,

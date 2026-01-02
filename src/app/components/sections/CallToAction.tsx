@@ -33,8 +33,8 @@ export default function CallToAction() {
                     className="mt-6 text-body-lg max-w-xl mx-auto"
                     style={{ color: "var(--sienna)" }}
                 >
-                    Commission a personalized wildlife drawing that captures
-                    your story, your connection, your remembrance.
+                    Order a personalized wildlife drawing that captures
+                    your story and your remembrance
                 </p>
 
                 {/* CTA Button */}
@@ -47,7 +47,7 @@ export default function CallToAction() {
                             color: "var(--cream)",
                         }}
                     >
-                        <Link href="/commissions">Commission a Drawing</Link>
+                        <Link href="/commissions">Order a Drawing</Link>
                     </Button>
                 </div>
 

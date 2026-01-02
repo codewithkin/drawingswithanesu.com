@@ -72,10 +72,10 @@ export default function CommissionsPage() {
 
                     <div className="max-w-3xl">
                         <h1 className="text-h1 mb-6" style={{ color: "var(--charcoal)" }}>
-                            Commission a Drawing
+                            Order a Drawing
                         </h1>
                         <p className="text-body-lg" style={{ color: "var(--sienna)" }}>
-                            Transform your memories into lasting art. Each piece is carefully drawn to capture the soul through the eyes — where emotion and connection live.
+                            Transform your memories into lasting art. Each piece is carefully drawn to capture the soul through the eyes where emotion and connection live.
                         </p>
 
                         <div className="mt-8 flex items-center gap-4">

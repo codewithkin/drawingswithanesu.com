@@ -85,8 +85,8 @@ export default function CommissionForm({
             }
 
             setSubmitted(true);
-            toast.success("Commission request sent successfully!", {
-                description: "I'll be in touch within 48 hours to discuss your commission.",
+            toast.success("Order request sent successfully!", {
+                description: "I'll be in touch within 48 hours to discuss your order.",
                 duration: 5000,
             });
 
@@ -98,7 +98,7 @@ export default function CommissionForm({
             }, 5000);
         } catch (err) {
             setError(err instanceof Error ? err.message : "Something went wrong");
-            toast.error("Failed to send commission request", {
+            toast.error("Failed to send order request", {
                 description: err instanceof Error ? err.message : "Something went wrong. Please try again.",
             });
         } finally {
@@ -110,7 +110,7 @@ export default function CommissionForm({
         <section className="py-16 lg:py-24 px-6">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-h2 mb-8" style={{ color: "var(--charcoal)" }}>
-                    Request Your Commission
+                    Request Your Order
                 </h2>
 
                 {selectedPackage && (
@@ -144,7 +144,7 @@ export default function CommissionForm({
                             <Check className="w-8 h-8" style={{ color: "var(--cream)" }} />
                         </div>
                         <h3 className="text-h3 mb-2" style={{ color: "var(--charcoal)" }}>Request Submitted!</h3>
-                        <p className="text-body" style={{ color: "var(--sienna)" }}>Thank you for your interest. I'll be in touch within 48 hours to discuss your commission.</p>
+                        <p className="text-body" style={{ color: "var(--sienna)" }}>Thank you for your interest. I'll be in touch within 48 hours to discuss your order.</p>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
@@ -206,7 +206,7 @@ export default function CommissionForm({
                         {selectedPackage && (
                             <div className="p-4 rounded" style={{ backgroundColor: "var(--warm-white)", border: "1px solid var(--sand)" }}>
                                 <p className="text-small mb-1" style={{ color: "var(--sienna)" }}>Selected Package:</p>
-                                <p className="text-body font-medium" style={{ color: "var(--charcoal)" }}>{commissionPackages.find((p) => p.id === selectedPackage)?.size} — {commissionPackages.find((p) => p.id === selectedPackage)?.price}</p>
+                                <p className="text-body font-medium" style={{ color: "var(--charcoal)" }}>{commissionPackages.find((p) => p.id === selectedPackage)?.size} ${commissionPackages.find((p) => p.id === selectedPackage)?.price}</p>
                             </div>
                         )}
 
@@ -218,7 +218,7 @@ export default function CommissionForm({
 
                         <div className="pt-6">
                             <Button type="submit" disabled={!selectedPackage || loading} className="w-full px-8 py-6 text-body font-medium tracking-wide transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed" style={{ backgroundColor: selectedPackage ? "var(--charcoal)" : "var(--sand)", color: "var(--cream)" }}>
-                                {loading ? "Sending..." : "Submit Commission Request"}
+                                {loading ? "Sending..." : "Submit Order Request"}
                             </Button>
                             {!selectedPackage && <p className="text-small text-center mt-2" style={{ color: "var(--sienna)" }}>Please select a package above</p>}
                         </div>
