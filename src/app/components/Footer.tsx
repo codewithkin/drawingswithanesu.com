@@ -20,7 +20,7 @@ export default function Footer() {
                             alt="Drawings With Anesu"
                             width={48}
                             height={48}
-                            className="w-12 h-12"
+                            className="w-12 h-12 rounded-full"
                         />
                         <p
                             className="text-body-lg font-semibold"

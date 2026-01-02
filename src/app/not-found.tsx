@@ -51,7 +51,7 @@ export default function NotFound() {
                     alt="Drawings With Anesu"
                     width={120}
                     height={120}
-                    className="opacity-60"
+                    className="opacity-60 rounded-full"
                     priority
                 />
             </div>

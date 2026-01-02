@@ -13,7 +13,7 @@ export default function Loading() {
                     alt="Loading"
                     width={120}
                     height={120}
-                    className="animate-pulse"
+                    className="animate-pulse rounded-full"
                     style={{ animationDuration: "2s" }}
                     priority
                 />

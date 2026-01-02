@@ -45,7 +45,7 @@ export default function Error({
                     alt="Drawings With Anesu"
                     width={100}
                     height={100}
-                    className="opacity-50 animate-pulse"
+                    className="opacity-50 animate-pulse rounded-full"
                     style={{ animationDuration: "3s" }}
                     priority
                 />

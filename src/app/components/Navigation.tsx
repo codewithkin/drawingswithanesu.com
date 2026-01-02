@@ -34,7 +34,7 @@ export default function Navigation() {
                             alt="Drawings With Anesu"
                             width={40}
                             height={40}
-                            className="w-10 h-10"
+                            className="w-10 h-10 rounded-full"
                         />
                     </Link>
 
