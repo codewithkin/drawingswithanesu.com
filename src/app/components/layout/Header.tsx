@@ -1,3 +1,7 @@
+/**
+ * Header component
+ * TODO: Add logo and navigation links
+ */
 export default function Header() {
     return (
         <header id="site-header">
