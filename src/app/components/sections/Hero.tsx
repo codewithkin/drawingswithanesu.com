@@ -33,16 +33,21 @@ export default function Hero() {
 
             {/* Content */}
             <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
-                {/* Logo */}
-                <div className="hero-logo mb-8 flex justify-center">
-                    <Image
-                        src="/logo.png"
-                        alt="Drawings With Anesu Logo"
-                        width={180}
-                        height={180}
-                        className="opacity-90"
-                        priority
-                    />
+                {/* Artist Portrait */}
+                <div className="hero-portrait mb-8 flex justify-center">
+                    <div
+                        className="relative w-44 h-44 rounded-full overflow-hidden shadow-art"
+                        style={{ border: "3px solid var(--sand)" }}
+                    >
+                        <Image
+                            src="/images/anesu.jpeg"
+                            alt="Portrait of Anesu Ndangariro"
+                            width={176}
+                            height={176}
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
                 </div>
 
                 <h1
@@ -67,23 +72,6 @@ export default function Hero() {
                     mother-child bond — each drawing captures the soul through
                     the eyes.
                 </p>
-
-                {/* Artist Portrait (prominent) */}
-                <div className="mt-8 flex justify-center">
-                    <div
-                        className="relative w-40 h-40 rounded-full overflow-hidden shadow-art"
-                        style={{ border: "3px solid var(--sand)" }}
-                    >
-                        <Image
-                            src="/images/anesu.jpeg"
-                            alt="Portrait of Anesu Ndangariro"
-                            width={160}
-                            height={160}
-                            className="object-cover"
-                            priority
-                        />
-                    </div>
-                </div>
             </div>
 
             {/* Scroll Indicator */}
