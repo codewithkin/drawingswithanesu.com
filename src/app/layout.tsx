@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     description:
       "Wildlife art exploring memory, Ubuntu, and the mother-child bond. Each drawing speaks to anyone who has lost someone too soon.",
     images: ["/og-image.jpg"],
-    creator: "@drawingswithanesu",
+    creator: "@anesumuungani7o",
   },
 
   robots: {
@@ -119,8 +119,9 @@ const structuredData = {
   url: "https://drawingswithanesu.com",
   image: "https://drawingswithanesu.com/anesu-portrait.jpg",
   sameAs: [
-    "https://instagram.com/drawingswithanesu",
-    "https://twitter.com/drawingswithanesu",
+    "https://www.instagram.com/drawings.with.anesu?igsh=MXI0bDc0c3E0aXp6dw==",
+    "https://www.tiktok.com/@drawings.with.anesu?_r=1&_t=ZM-92je6qsoC0B",
+    "https://x.com/anesumuungani7o",
   ],
   jobTitle: "Wildlife Artist",
   knowsAbout: [
