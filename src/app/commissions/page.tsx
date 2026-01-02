@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, Upload, Check } from "lucide-react";
+import { useScrollStagger } from "@/hooks/useScrollAnimations";
 
 const commissionPackages = [
     {
@@ -60,6 +61,7 @@ export default function CommissionsPage() {
     const [submitted, setSubmitted] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const ref = useScrollStagger();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -206,7 +208,7 @@ export default function CommissionsPage() {
                     </p>
 
                     {/* Package Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" ref={ref}>
                         {commissionPackages.map((pkg) => (
                             <Card
                                 key={pkg.id}
@@ -222,6 +224,7 @@ export default function CommissionsPage() {
                                             : "var(--sand)",
                                     backgroundColor: "var(--cream)",
                                 }}
+                                data-scroll-item
                             >
                                 <CardContent className="p-6 text-center">
                                     {selectedPackage === pkg.id && (

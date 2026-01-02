@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useScrollStagger } from "@/hooks/useScrollAnimations";
 
 // Real artwork data from Anesu's portfolio
 const featuredArtworks = [
@@ -67,6 +68,8 @@ const featuredArtworks = [
 ];
 
 export default function FeaturedWorks() {
+    const ref = useScrollStagger();
+
     return (
         <section
             id="featured-works"
@@ -91,11 +94,12 @@ export default function FeaturedWorks() {
                 </div>
 
                 {/* Artwork Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" ref={ref}>
                     {featuredArtworks.map((artwork) => (
                         <article
                             key={artwork.id}
                             className="group cursor-pointer"
+                            data-scroll-item
                         >
                             {/* Image Container */}
                             <div

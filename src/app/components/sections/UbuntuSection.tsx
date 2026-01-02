@@ -1,12 +1,16 @@
 import Image from "next/image";
+import { useScrollSlideIn } from "@/hooks/useScrollAnimations";
 
 // UbuntuSection: explains the philosophical context behind the work
 export default function UbuntuSection() {
+    const ref = useScrollSlideIn();
+
     return (
         <section
             id="ubuntu"
             className="py-24 lg:py-32"
             style={{ backgroundColor: "var(--graphite)" }}
+            ref={ref}
         >
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">

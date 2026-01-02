@@ -1,14 +1,17 @@
 import Image from "next/image";
+import { useScrollReveal } from "@/hooks/useScrollAnimations";
 
 /**
  * ArtistStatement — highlights the artist's motivation and style
  */
 export default function ArtistStatement() {
+    const ref = useScrollReveal();
     return (
         <section
             id="artist-statement"
             className="py-24 lg:py-32"
             style={{ backgroundColor: "var(--warm-white)" }}
+            ref={ref}
         >
             <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-16 text-center">
                 {/* Main Statement */}

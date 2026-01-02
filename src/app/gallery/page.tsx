@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, X } from "lucide-react";
+import { useScrollStagger } from "@/hooks/useScrollAnimations";
 
 // Full artwork collection with Anesu's descriptions
 const artworks = [
@@ -126,6 +127,7 @@ export default function GalleryPage() {
     const [selectedArtwork, setSelectedArtwork] = useState<
         (typeof artworks)[0] | null
     >(null);
+    const ref = useScrollStagger();
 
     return (
         <main style={{ backgroundColor: "var(--cream)" }}>
@@ -165,12 +167,13 @@ export default function GalleryPage() {
             {/* Gallery Grid */}
             <section className="pb-24 lg:pb-32 px-6">
                 <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" ref={ref}>
                         {artworks.map((artwork) => (
                             <article
                                 key={artwork.id}
                                 className="group cursor-pointer"
                                 onClick={() => setSelectedArtwork(artwork)}
+                                data-scroll-item
                             >
                                 {/* Image Container */}
                                 <div

@@ -1,15 +1,18 @@
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
+import { useScrollReveal } from "@/hooks/useScrollAnimations";
 
 /**
  * Hero section — introduces the site and artist
  */
 export default function Hero() {
+    const ref = useScrollReveal();
     return (
         <section
             id="hero"
             className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
             style={{ backgroundColor: "var(--cream)" }}
+            ref={ref}
         >
             {/* Background Image Placeholder */}
             <div
