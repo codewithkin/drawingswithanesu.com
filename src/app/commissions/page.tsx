@@ -22,48 +22,48 @@ const commissionPackages = [
         id: "a3",
         size: "A3",
         dimensions: "42 × 30cm",
-        price: "$200",
+        price: 200,
         subjects: "Single animal",
     },
     {
         id: "a2",
         size: "A2",
         dimensions: "60 × 42cm",
-        price: "$400",
+        price: 400,
         subjects: "Single or paired",
     },
     {
         id: "a1",
         size: "A1",
         dimensions: "84 × 60cm",
-        price: "$800",
+        price: 800,
         subjects: "Paired animals",
     },
     {
         id: "a0",
         size: "A0",
         dimensions: "120 × 84cm",
-        price: "$1,600",
+        price: 1600,
         subjects: "Complex composition",
     },
     {
         id: "a-plus",
         size: "A+",
         dimensions: "168 × 120cm",
-        price: "$3,200",
+        price: 3200,
         subjects: "Large-scale masterpiece",
     },
 ];
 
 const printOptions = [
-    { id: "paper-a0", label: "Paper Print A0 (84cm × 120cm)" },
-    { id: "paper-a1", label: "Paper Print A1 (59cm × 84cm)" },
-    { id: "paper-a2", label: "Paper Print A2 (42cm × 59cm)" },
-    { id: "paper-a3", label: "Paper Print A3 (29cm × 42cm)" },
-    { id: "canvas-a0", label: "Canvas Print A0 (84cm × 120cm)" },
-    { id: "canvas-a1", label: "Canvas Print A1 (59cm × 84cm)" },
-    { id: "canvas-a2", label: "Canvas Print A2 (42cm × 59cm)" },
-    { id: "canvas-a3", label: "Canvas Print A3 (29cm × 42cm)" },
+    { id: "paper-a0", label: "Paper Print A0 (84cm × 120cm)", price: 80 },
+    { id: "paper-a1", label: "Paper Print A1 (59cm × 84cm)", price: 100 },
+    { id: "paper-a2", label: "Paper Print A2 (42cm × 59cm)", price: 70 },
+    { id: "paper-a3", label: "Paper Print A3 (29cm × 42cm)", price: 30 },
+    { id: "canvas-a0", label: "Canvas Print A0 (84cm × 120cm)", price: 240 },
+    { id: "canvas-a1", label: "Canvas Print A1 (59cm × 84cm)", price: 200 },
+    { id: "canvas-a2", label: "Canvas Print A2 (42cm × 59cm)", price: 160 },
+    { id: "canvas-a3", label: "Canvas Print A3 (29cm × 42cm)", price: 90 },
 ];
 
 export default function CommissionsPage() {
@@ -81,6 +81,20 @@ export default function CommissionsPage() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const ref = useScrollStagger();
+
+    // Calculate total price based on selected package and print
+    const calculateTotalPrice = () => {
+        const basePackage = commissionPackages.find((p) => p.id === selectedPackage);
+        const printAddon = printOptions.find((p) => p.id === selectedPrint);
+
+        let total = basePackage?.price || 0;
+        if (printAddon) {
+            total += printAddon.price;
+        }
+        return total;
+    };
+
+    const totalPrice = calculateTotalPrice();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -108,6 +122,7 @@ export default function CommissionsPage() {
                     ...formData,
                     selectedPackage: packageDetails,
                     selectedPrint: printOption,
+                    totalPrice: totalPrice,
                 }),
             });
 
@@ -281,7 +296,7 @@ export default function CommissionsPage() {
                                         className="text-h2 mb-3"
                                         style={{ color: "var(--charcoal)" }}
                                     >
-                                        {pkg.price}
+                                        ${pkg.price}
                                     </p>
                                     <p
                                         className="text-small"
@@ -308,6 +323,73 @@ export default function CommissionsPage() {
                     >
                         Request Your Commission
                     </h2>
+
+                    {selectedPackage && (
+                        <div
+                            className="mb-8 p-6 rounded"
+                            style={{
+                                backgroundColor: "var(--warm-white)",
+                                borderLeft: "4px solid var(--ochre)",
+                            }}
+                        >
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <p
+                                        className="text-small"
+                                        style={{ color: "var(--sienna)" }}
+                                    >
+                                        Package Price:
+                                    </p>
+                                    <p
+                                        className="text-h3"
+                                        style={{ color: "var(--charcoal)" }}
+                                    >
+                                        ${commissionPackages.find((p) => p.id === selectedPackage)?.price || 0}
+                                    </p>
+                                </div>
+                                {selectedPrint && (
+                                    <>
+                                        <div
+                                            className="w-px h-12"
+                                            style={{ backgroundColor: "var(--sand)" }}
+                                        ></div>
+                                        <div>
+                                            <p
+                                                className="text-small"
+                                                style={{ color: "var(--sienna)" }}
+                                            >
+                                                Print Addon:
+                                            </p>
+                                            <p
+                                                className="text-h3"
+                                                style={{ color: "var(--ochre)" }}
+                                            >
+                                                +${printOptions.find((p) => p.id === selectedPrint)?.price || 0}
+                                            </p>
+                                        </div>
+                                    </>
+                                )}
+                                <div
+                                    className="w-px h-12"
+                                    style={{ backgroundColor: "var(--sand)" }}
+                                ></div>
+                                <div>
+                                    <p
+                                        className="text-small"
+                                        style={{ color: "var(--sienna)" }}
+                                    >
+                                        Total:
+                                    </p>
+                                    <p
+                                        className="text-h2 font-bold"
+                                        style={{ color: "var(--charcoal)" }}
+                                    >
+                                        ${totalPrice}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
 
                     {submitted ? (
                         <div
