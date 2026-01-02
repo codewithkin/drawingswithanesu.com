@@ -1,3 +1,4 @@
+// Navigation component (links to be implemented)
 export default function Navigation() {
     return (
         <nav id="site-navigation">
