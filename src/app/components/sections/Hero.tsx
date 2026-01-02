@@ -1,4 +1,5 @@
 import { ChevronDown } from "lucide-react";
+import Image from "next/image";
 
 /**
  * Hero section — introduces the site and artist
@@ -32,6 +33,18 @@ export default function Hero() {
 
             {/* Content */}
             <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
+                {/* Logo */}
+                <div className="hero-logo mb-8 flex justify-center">
+                    <Image
+                        src="/logo.png"
+                        alt="Drawings With Anesu Logo"
+                        width={180}
+                        height={180}
+                        className="opacity-90"
+                        priority
+                    />
+                </div>
+
                 <h1
                     className="hero-title text-display tracking-tight"
                     style={{ color: "var(--charcoal)" }}
