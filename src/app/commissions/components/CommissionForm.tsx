@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Upload, Check } from "lucide-react";
+import { toast } from "sonner";
 
 type Package = { id: string; size: string; dimensions: string; price: number };
 type PrintOption = { id: string; label: string; price: number };
@@ -52,13 +53,13 @@ export default function CommissionForm({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        
+
         if (!selectedPackage) {
             setError("Please select a package above before submitting.");
             window.scrollTo({ top: 0, behavior: "smooth" });
             return;
         }
-        
+
         setLoading(true);
         setError("");
 
@@ -79,6 +80,11 @@ export default function CommissionForm({
             }
 
             setSubmitted(true);
+            toast.success("Commission request sent successfully!", {
+                description: "I'll be in touch within 48 hours to discuss your commission.",
+                duration: 5000,
+            });
+            
             setTimeout(() => {
                 setSubmitted(false);
                 setFormData({ name: "", email: "", phone: "", animalType: "", message: "", referenceImages: null });
@@ -87,6 +93,9 @@ export default function CommissionForm({
             }, 5000);
         } catch (err) {
             setError(err instanceof Error ? err.message : "Something went wrong");
+            toast.error("Failed to send commission request", {
+                description: err instanceof Error ? err.message : "Something went wrong. Please try again.",
+            });
         } finally {
             setLoading(false);
         }
