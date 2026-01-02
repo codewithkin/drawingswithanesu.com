@@ -15,3 +15,6 @@ export default function Home() {
     </main>
   );
 }
+
+// Page assembled from modular sections. Each section is implemented as its own
+// component to keep the layout clear and maintainable.
