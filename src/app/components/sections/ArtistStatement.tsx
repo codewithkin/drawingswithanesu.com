@@ -1,3 +1,6 @@
+/**
+ * ArtistStatement — highlights the artist's motivation and style
+ */
 export default function ArtistStatement() {
     return (
         <section
