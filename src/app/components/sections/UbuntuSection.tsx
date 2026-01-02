@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 // UbuntuSection: explains the philosophical context behind the work
 export default function UbuntuSection() {
     return (
@@ -8,21 +10,18 @@ export default function UbuntuSection() {
         >
             <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                    {/* Image Column */}
+                    {/* Image Column - Motherland Africa */}
                     <div className="order-2 lg:order-1">
                         <div
-                            className="relative aspect-[3/4] overflow-hidden shadow-art"
-                            style={{ backgroundColor: "var(--charcoal)" }}
+                            className="relative aspect-square overflow-hidden shadow-art"
                         >
-                            {/* Merged animals artwork placeholder */}
-                            <div
-                                className="absolute inset-0 flex items-center justify-center"
-                                style={{ color: "var(--sand)" }}
-                            >
-                                <span className="text-caption">
-                                    Merged Animals Artwork
-                                </span>
-                            </div>
+                            <Image
+                                src="/images/artworks/africa-in-the-shape-of-african-potraits.jpeg"
+                                alt="Motherland - Africa shaped by wildlife: lion, leopard, elephant, buffalo, and rhino with Victoria Falls"
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 1024px) 100vw, 50vw"
+                            />
                         </div>
                     </div>
 
