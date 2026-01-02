@@ -114,12 +114,12 @@ But wild dogs always have their way through — which is fascinating. Like the w
     },
     {
         id: 9,
-        title: "Single Line",
-        subtitle: "Lion profile",
+        title: "Eland Portrait",
+        subtitle: "Majestic presence",
         medium: "Charcoal",
         size: "91 × 64 cm",
-        image: "/images/artworks/single-line-potrait.jpeg",
-        description: `A majestic lion captured in profile — the flowing mane and powerful silhouette embodying strength and quiet authority.`,
+        image: "/images/artworks/eland-potrait.jpeg",
+        description: `The eland, Africa's largest antelope, stands with quiet dignity. This portrait captures the gentle giant's calm presence and soulful gaze.`,
     },
 ];
 

@@ -81,12 +81,11 @@ export default function Navigation() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="block px-3 py-2 rounded-md text-body font-medium transition-colors duration-300"
+                                    className="block px-3 py-2 rounded-md text-body font-medium transition-colors duration-300 hover:bg-[var(--sand)]/30"
                                     style={{
                                         color: "var(--charcoal)",
                                     }}
                                     onClick={() => setIsOpen(false)}
-                                    onTouchEnd={() => setIsOpen(false)}
                                 >
                                     {link.label}
                                 </Link>
