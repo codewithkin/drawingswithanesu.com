@@ -52,6 +52,13 @@ export default function CommissionForm({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!selectedPackage) {
+            setError("Please select a package above before submitting.");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+        }
+        
         setLoading(true);
         setError("");
 

@@ -30,8 +30,11 @@ export default function PackageGrid({
                 <h2 className="text-h2 text-center mb-4" style={{ color: "var(--charcoal)" }}>
                     Select Your Package
                 </h2>
-                <p className="text-body text-center mb-12 max-w-2xl mx-auto" style={{ color: "var(--sienna)" }}>
+                <p className="text-body text-center mb-2 max-w-2xl mx-auto" style={{ color: "var(--sienna)" }}>
                     Prices include standard framing and international delivery. Custom requests may adjust pricing.
+                </p>
+                <p className="text-small text-center mb-12" style={{ color: "var(--ochre)" }}>
+                    👆 Click a card below to select your package
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" ref={ref}>

@@ -98,14 +98,14 @@ export default function CommissionsPage() {
                 </div>
             </section>
 
-            {/* Commission form component */}
-            <CommissionForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} commissionPackages={commissionPackages} printOptions={printOptions} />
+            {/* Process section component */}
+            <ProcessSection />
 
             {/* Package grid component */}
             <PackageGrid packages={commissionPackages} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />
 
-            {/* Process section component */}
-            <ProcessSection />
+            {/* Commission form component */}
+            <CommissionForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} commissionPackages={commissionPackages} printOptions={printOptions} />
         </main>
     );
 }
