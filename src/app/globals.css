@@ -125,9 +125,10 @@
 }
 
 /* ========================================
-   Drawings With Anesu - Design System
-   ======================================== */
-
+  Drawings With Anesu - Design System
+  (brand tokens and utilities)
+  ======================================== */
+/* NOTE: these are intentionally small, portable tokens used across components */
 :root {
   /* Brand Colors */
   --cream: #faf9f7;
