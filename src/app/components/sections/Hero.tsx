@@ -74,7 +74,7 @@ export default function Hero() {
                     style={{ color: "var(--charcoal)", opacity: 0.8 }}
                 >
                     Wildlife artwork exploring memory, Ubuntu, and the
-                    mother-child bond — each drawing captures the soul through
+                    mother-child bond, each drawing captures the soul through
                     the eyes.
                 </p>
             </div>

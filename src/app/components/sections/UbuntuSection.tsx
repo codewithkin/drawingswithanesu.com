@@ -64,7 +64,7 @@ export default function UbuntuSection() {
                             >
                                 Through my work I explore Ubuntu, the philosophy
                                 of interconnectedness. I merge animals to show
-                                how we are all connected — to each other, to
+                                how we are all connected to each other, to
                                 nature, to those we have lost.
                             </p>
 

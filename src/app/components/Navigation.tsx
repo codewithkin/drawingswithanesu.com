@@ -13,7 +13,7 @@ export default function Navigation() {
         { href: "/#artist-statement", label: "About" },
         { href: "/#featured-works", label: "Works" },
         { href: "/gallery", label: "Gallery" },
-        { href: "/commissions", label: "Commissions" },
+        { href: "/commissions", label: "Order Inquiry" },
     ];
 
     return (
