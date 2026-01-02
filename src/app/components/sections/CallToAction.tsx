@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
+// CallToAction section — primary conversion area for commissions
 export default function CallToAction() {
     return (
         <section
