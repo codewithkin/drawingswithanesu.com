@@ -1,5 +1,8 @@
 import { ChevronDown } from "lucide-react";
 
+/**
+ * Hero section — introduces the site and artist
+ */
 export default function Hero() {
     return (
         <section
