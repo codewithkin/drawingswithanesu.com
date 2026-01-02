@@ -60,6 +60,11 @@ export default function CommissionForm({
             return;
         }
 
+        if (!selectedPrint) {
+            setError("Please select a print type before submitting.");
+            return;
+        }
+
         setLoading(true);
         setError("");
 
@@ -155,8 +160,8 @@ export default function CommissionForm({
                             </div>
 
                             <div>
-                                <label className="block text-body font-medium mb-2" style={{ color: "var(--charcoal)" }}>Phone Number (optional)</label>
-                                <Input type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0" style={{ borderColor: "var(--sand)", color: "var(--charcoal)" }} placeholder="+1 (555) 000-0000" />
+                                <label className="block text-body font-medium mb-2" style={{ color: "var(--charcoal)" }}>Phone Number *</label>
+                                <Input required type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0" style={{ borderColor: "var(--sand)", color: "var(--charcoal)" }} placeholder="+1 (555) 000-0000" />
                             </div>
                         </div>
 
@@ -167,8 +172,8 @@ export default function CommissionForm({
                             </div>
 
                             <div>
-                                <label className="block text-body font-medium mb-2" style={{ color: "var(--charcoal)" }}>Print Type (optional)</label>
-                                <Select value={selectedPrint} onValueChange={setSelectedPrint}>
+                                <label className="block text-body font-medium mb-2" style={{ color: "var(--charcoal)" }}>Print Type *</label>
+                                <Select required value={selectedPrint} onValueChange={setSelectedPrint}>
                                     <SelectTrigger className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0" style={{ borderColor: "var(--sand)", color: "var(--charcoal)" }}>
                                         <SelectValue placeholder="Choose a print option..." />
                                     </SelectTrigger>
@@ -186,9 +191,9 @@ export default function CommissionForm({
                             </div>
 
                             <div>
-                                <label className="block text-body font-medium mb-2" style={{ color: "var(--charcoal)" }}>Reference Images (optional)</label>
+                                <label className="block text-body font-medium mb-2" style={{ color: "var(--charcoal)" }}>Reference Images *</label>
                                 <div className="border-2 border-dashed rounded p-8 text-center cursor-pointer transition-colors duration-300 hover:border-opacity-100" style={{ borderColor: "var(--sand)", backgroundColor: "var(--warm-white)" }}>
-                                    <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
+                                    <input required type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
                                     <label htmlFor="file-upload" className="cursor-pointer">
                                         <Upload className="w-8 h-8 mx-auto mb-2" style={{ color: "var(--sienna)" }} />
                                         <p className="text-body" style={{ color: "var(--charcoal)" }}>{formData.referenceImages ? formData.referenceImages.name : "Click to upload reference photos"}</p>

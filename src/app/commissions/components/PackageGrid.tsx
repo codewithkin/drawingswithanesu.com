@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { useScrollStagger } from "@/hooks/useScrollAnimations";
@@ -34,7 +33,7 @@ export default function PackageGrid({
                     Prices include standard framing and international delivery. Custom requests may adjust pricing.
                 </p>
                 <p className="text-small text-center mb-12" style={{ color: "var(--ochre)" }}>
-                    👆 Click a card below to select your package
+                    Click a card below to select your package
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" ref={ref}>
