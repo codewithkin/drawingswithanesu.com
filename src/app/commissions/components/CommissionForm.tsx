@@ -191,9 +191,9 @@ export default function CommissionForm({
                             </div>
 
                             <div>
-                                <label className="block text-body font-medium mb-2" style={{ color: "var(--charcoal)" }}>Reference Images *</label>
+                                <label className="block text-body font-medium mb-2" style={{ color: "var(--charcoal)" }}>Reference Images (optional)</label>
                                 <div className="border-2 border-dashed rounded p-8 text-center cursor-pointer transition-colors duration-300 hover:border-opacity-100" style={{ borderColor: "var(--sand)", backgroundColor: "var(--warm-white)" }}>
-                                    <input required type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
+                                    <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" id="file-upload" />
                                     <label htmlFor="file-upload" className="cursor-pointer">
                                         <Upload className="w-8 h-8 mx-auto mb-2" style={{ color: "var(--sienna)" }} />
                                         <p className="text-body" style={{ color: "var(--charcoal)" }}>{formData.referenceImages ? formData.referenceImages.name : "Click to upload reference photos"}</p>
