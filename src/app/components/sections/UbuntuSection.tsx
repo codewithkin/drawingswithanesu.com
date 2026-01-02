@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { useScrollSlideIn } from "@/hooks/useScrollAnimations";
 
