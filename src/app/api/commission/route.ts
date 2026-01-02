@@ -85,8 +85,8 @@ Client Information:
 Commission Details:
 - Package: ${selectedPackage}
 - Print Type: ${selectedPrint}
-- Estimated Total: $${totalPrice}
 - Subject/Animal: ${animalType}
+- Estimated Total: $${totalPrice}
 
 Message:
 ${message}
@@ -148,13 +148,13 @@ This message was sent from the Drawings With Anesu website commission form.
         await transporter.sendMail(confirmationMail);
 
         return NextResponse.json(
-            { success: true, message: "Commission request sent successfully" },
+            { success: true, message: "Commission request received" },
             { status: 200 }
         );
     } catch (error) {
-        console.error("Error sending commission email:", error);
+        console.error("Commission request error:", error);
         return NextResponse.json(
-            { error: "Failed to send commission request. Please try again." },
+            { error: "Failed to process commission request. Please try again." },
             { status: 500 }
         );
     }
