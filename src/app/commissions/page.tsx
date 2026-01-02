@@ -750,7 +750,7 @@ export default function CommissionsPage() {
                             className="text-body-lg max-w-2xl mx-auto"
                             style={{ color: "var(--sand)" }}
                         >
-                            From your initial vision to the final framed masterpiece, here's how we bring your 
+                            From your initial vision to the final framed masterpiece, here's how we bring your
                             commission to life through collaboration and careful craftsmanship.
                         </p>
                     </div>
