@@ -156,7 +156,7 @@ export default function GalleryPage() {
                             className="text-body-lg"
                             style={{ color: "var(--sienna)" }}
                         >
-                            Each piece tells a story — of memory, connection,
+                            Each piece tells a story of memory, connection,
                             and the soul revealed through the eyes. Click on any
                             artwork to discover the journey behind its creation.
                         </p>
