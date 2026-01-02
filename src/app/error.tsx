@@ -122,7 +122,7 @@ export default function Error({
                 {/* Artist Portrait */}
                 <div className="mt-16 flex justify-center">
                     <div
-                        className="relative w-24 h-24 rounded-full overflow-hidden opacity-30"
+                        className="relative w-32 h-32 rounded-full overflow-hidden opacity-50 shadow-art"
                         style={{ border: "2px solid var(--sand)" }}
                     >
                         <Image

@@ -67,6 +67,23 @@ export default function Hero() {
                     mother-child bond — each drawing captures the soul through
                     the eyes.
                 </p>
+
+                {/* Artist Portrait (prominent) */}
+                <div className="mt-8 flex justify-center">
+                    <div
+                        className="relative w-40 h-40 rounded-full overflow-hidden shadow-art"
+                        style={{ border: "3px solid var(--sand)" }}
+                    >
+                        <Image
+                            src="/images/anesu.jpeg"
+                            alt="Portrait of Anesu Ndangariro"
+                            width={160}
+                            height={160}
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
+                </div>
             </div>
 
             {/* Scroll Indicator */}

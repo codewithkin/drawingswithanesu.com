@@ -124,7 +124,7 @@ export default function NotFound() {
                 {/* Artist Image - subtle */}
                 <div className="mt-16 flex justify-center">
                     <div
-                        className="relative w-32 h-32 rounded-full overflow-hidden opacity-20"
+                        className="relative w-40 h-40 rounded-full overflow-hidden opacity-40 shadow-art"
                         style={{ border: "2px solid var(--sand)" }}
                     >
                         <Image
