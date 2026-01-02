@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 /**
  * ArtistStatement — highlights the artist's motivation and style
  */
@@ -39,19 +41,19 @@ export default function ArtistStatement() {
                     style={{ backgroundColor: "var(--sand)" }}
                 />
 
-                {/* Portrait Placeholder */}
+                {/* Polarity Bears Portrait */}
                 <div className="mt-12 flex justify-center">
                     <div
-                        className="relative w-48 h-48 lg:w-64 lg:h-64 rounded-full overflow-hidden shadow-art"
-                        style={{ backgroundColor: "var(--sand)" }}
+                        className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-full overflow-hidden shadow-art"
+                        style={{ border: "3px solid var(--sand)" }}
                     >
-                        {/* Portrait image will go here */}
-                        <div
-                            className="absolute inset-0 flex items-center justify-center text-caption"
-                            style={{ color: "var(--sienna)" }}
-                        >
-                            Portrait
-                        </div>
+                        <Image
+                            src="/images/artworks/polarity-high-quality-bears-potrait.jpeg"
+                            alt="Polarity - Two bears in conflict, representing yin and yang"
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 1024px) 256px, 320px"
+                        />
                     </div>
                 </div>
 
