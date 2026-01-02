@@ -7,6 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { ArrowLeft, Upload, Check } from "lucide-react";
 import { useScrollStagger } from "@/hooks/useScrollAnimations";
 
@@ -48,8 +55,20 @@ const commissionPackages = [
     },
 ];
 
+const printOptions = [
+    { id: "paper-a0", label: "Paper Print A0 (84cm × 120cm)" },
+    { id: "paper-a1", label: "Paper Print A1 (59cm × 84cm)" },
+    { id: "paper-a2", label: "Paper Print A2 (42cm × 59cm)" },
+    { id: "paper-a3", label: "Paper Print A3 (29cm × 42cm)" },
+    { id: "canvas-a0", label: "Canvas Print A0 (84cm × 120cm)" },
+    { id: "canvas-a1", label: "Canvas Print A1 (59cm × 84cm)" },
+    { id: "canvas-a2", label: "Canvas Print A2 (42cm × 59cm)" },
+    { id: "canvas-a3", label: "Canvas Print A3 (29cm × 42cm)" },
+];
+
 export default function CommissionsPage() {
     const [selectedPackage, setSelectedPackage] = useState("");
+    const [selectedPrint, setSelectedPrint] = useState("");
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -75,6 +94,11 @@ export default function CommissionsPage() {
                 ? `${pkg.size} (${pkg.dimensions}) - ${pkg.price}`
                 : selectedPackage;
 
+            // Get the selected print details
+            const printOption = selectedPrint
+                ? printOptions.find((p) => p.id === selectedPrint)?.label || selectedPrint
+                : "Not selected";
+
             const response = await fetch("/api/commission", {
                 method: "POST",
                 headers: {
@@ -83,6 +107,7 @@ export default function CommissionsPage() {
                 body: JSON.stringify({
                     ...formData,
                     selectedPackage: packageDetails,
+                    selectedPrint: printOption,
                 }),
             });
 
@@ -423,6 +448,42 @@ export default function CommissionsPage() {
                                         }}
                                         placeholder="e.g., Lion and cub, Elephant pair, etc."
                                     />
+                                </div>
+
+                                <div>
+                                    <label
+                                        className="block text-body font-medium mb-2"
+                                        style={{ color: "var(--charcoal)" }}
+                                    >
+                                        Print Type (optional)
+                                    </label>
+                                    <Select value={selectedPrint} onValueChange={setSelectedPrint}>
+                                        <SelectTrigger
+                                            className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
+                                            style={{
+                                                borderColor: "var(--sand)",
+                                                color: "var(--charcoal)",
+                                            }}
+                                        >
+                                            <SelectValue placeholder="Choose a print option..." />
+                                        </SelectTrigger>
+                                        <SelectContent
+                                            style={{
+                                                backgroundColor: "var(--cream)",
+                                                borderColor: "var(--sand)",
+                                            }}
+                                        >
+                                            {printOptions.map((option) => (
+                                                <SelectItem
+                                                    key={option.id}
+                                                    value={option.id}
+                                                    style={{ color: "var(--charcoal)" }}
+                                                >
+                                                    {option.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
                                 </div>
 
                                 <div>

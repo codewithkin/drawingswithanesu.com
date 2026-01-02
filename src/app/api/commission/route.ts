@@ -11,6 +11,7 @@ export async function POST(request: NextRequest) {
             animalType,
             message,
             selectedPackage,
+            selectedPrint,
         } = body;
 
         // Validate required fields
@@ -54,6 +55,7 @@ export async function POST(request: NextRequest) {
                     <div style="background-color: #FFFFFF; padding: 20px; border: 1px solid #D4C5B5; margin-bottom: 20px;">
                         <h2 style="color: #8B5E3C; font-size: 18px; margin-bottom: 15px;">Commission Details</h2>
                         <p style="color: #1A1A1A; margin: 8px 0;"><strong>Package:</strong> ${selectedPackage}</p>
+                        <p style="color: #1A1A1A; margin: 8px 0;"><strong>Print Type:</strong> ${selectedPrint}</p>
                         <p style="color: #1A1A1A; margin: 8px 0;"><strong>Subject/Animal:</strong> ${animalType}</p>
                     </div>
                     
@@ -80,6 +82,7 @@ Client Information:
 
 Commission Details:
 - Package: ${selectedPackage}
+- Print Type: ${selectedPrint}
 - Subject/Animal: ${animalType}
 
 Message:
@@ -117,6 +120,7 @@ This message was sent from the Drawings With Anesu website commission form.
                     <div style="margin: 30px 0; padding: 20px; background-color: #FFFFFF; border: 1px solid #D4C5B5;">
                         <h2 style="color: #8B5E3C; font-size: 16px; margin-bottom: 10px;">Your Request Summary:</h2>
                         <p style="color: #1A1A1A; margin: 5px 0;">Package: ${selectedPackage}</p>
+                        <p style="color: #1A1A1A; margin: 5px 0;">Print Type: ${selectedPrint}</p>
                         <p style="color: #1A1A1A; margin: 5px 0;">Subject: ${animalType}</p>
                     </div>
                     
