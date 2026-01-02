@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
+// Sample data for featured artworks (placeholders)
 const featuredArtworks = [
     {
         id: 1,
