@@ -31,7 +31,7 @@ export default function PackageGrid({
                 <p className="text-body text-center mb-2 max-w-2xl mx-auto" style={{ color: "var(--sienna)" }}>
                     For international orders, shipping costs will be calculated separately.
                 </p>
-                <p className="text-small text-center mb-12" style={{ color: "var(--ochre)" }}>
+                <p className="text-small text-center mb-12 text-black">
                     Local delivery proces may vary based on location
                 </p>
 
