@@ -1,3 +1,4 @@
+// UbuntuSection: explains the philosophical context behind the work
 export default function UbuntuSection() {
     return (
         <section
