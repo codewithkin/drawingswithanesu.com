@@ -15,35 +15,30 @@ const commissionPackages = [
         size: "A3",
         dimensions: "42 × 30cm",
         price: 200,
-        subjects: "Single animal",
     },
     {
         id: "a2",
         size: "A2",
         dimensions: "60 × 42cm",
         price: 400,
-        subjects: "Single or paired",
     },
     {
         id: "a1",
         size: "A1",
         dimensions: "84 × 60cm",
         price: 800,
-        subjects: "Paired animals",
     },
     {
         id: "a0",
         size: "A0",
         dimensions: "120 × 84cm",
         price: 1600,
-        subjects: "Complex composition",
     },
     {
         id: "a-plus",
         size: "A+",
         dimensions: "168 × 120cm",
         price: 3200,
-        subjects: "Large-scale masterpiece",
     },
 ];
 

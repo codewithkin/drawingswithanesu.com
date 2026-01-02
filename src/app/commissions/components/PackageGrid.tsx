@@ -9,7 +9,6 @@ type Package = {
     size: string;
     dimensions: string;
     price: number;
-    subjects: string;
 };
 
 export default function PackageGrid({
@@ -63,9 +62,6 @@ export default function PackageGrid({
                                 </p>
                                 <p className="text-h2 mb-3" style={{ color: "var(--charcoal)" }}>
                                     ${pkg.price}
-                                </p>
-                                <p className="text-small" style={{ color: "var(--charcoal)", opacity: 0.7 }}>
-                                    {pkg.subjects}
                                 </p>
                             </CardContent>
                         </Card>
