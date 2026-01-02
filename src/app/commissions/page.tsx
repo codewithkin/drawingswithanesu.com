@@ -3,19 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { ArrowLeft, Upload, Check } from "lucide-react";
-import { useScrollStagger } from "@/hooks/useScrollAnimations";
+import { ArrowLeft } from "lucide-react";
+
+import PackageGrid from "./components/PackageGrid";
+import CommissionForm from "./components/CommissionForm";
+import ProcessSection from "./components/ProcessSection";
 
 const commissionPackages = [
     {
@@ -68,107 +60,12 @@ const printOptions = [
 
 export default function CommissionsPage() {
     const [selectedPackage, setSelectedPackage] = useState("");
-    const [selectedPrint, setSelectedPrint] = useState("");
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        animalType: "",
-        message: "",
-        referenceImages: null as File | null,
-    });
-    const [submitted, setSubmitted] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState("");
-    const ref = useScrollStagger();
-
-    // Calculate total price based on selected package and print
-    const calculateTotalPrice = () => {
-        const basePackage = commissionPackages.find((p) => p.id === selectedPackage);
-        const printAddon = printOptions.find((p) => p.id === selectedPrint);
-
-        let total = basePackage?.price || 0;
-        if (printAddon) {
-            total += printAddon.price;
-        }
-        return total;
-    };
-
-    const totalPrice = calculateTotalPrice();
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-        setError("");
-
-        try {
-            // Get the selected package details for the email
-            const pkg = commissionPackages.find((p) => p.id === selectedPackage);
-            const packageDetails = pkg
-                ? `${pkg.size} (${pkg.dimensions}) - ${pkg.price}`
-                : selectedPackage;
-
-            // Get the selected print details
-            const printOption = selectedPrint
-                ? printOptions.find((p) => p.id === selectedPrint)?.label || selectedPrint
-                : "Not selected";
-
-            const response = await fetch("/api/commission", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    ...formData,
-                    selectedPackage: packageDetails,
-                    selectedPrint: printOption,
-                    totalPrice: totalPrice,
-                }),
-            });
-
-            if (!response.ok) {
-                const data = await response.json();
-                throw new Error(data.error || "Failed to send request");
-            }
-
-            setSubmitted(true);
-
-            // Reset after 5 seconds
-            setTimeout(() => {
-                setSubmitted(false);
-                setFormData({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    animalType: "",
-                    message: "",
-                    referenceImages: null,
-                });
-                setSelectedPackage("");
-            }, 5000);
-        } catch (err) {
-            setError(
-                err instanceof Error
-                    ? err.message
-                    : "Something went wrong. Please try again."
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.files && e.target.files[0]) {
-            setFormData({ ...formData, referenceImages: e.target.files[0] });
-        }
-    };
 
     return (
         <main style={{ backgroundColor: "var(--cream)" }}>
             {/* Hero Section */}
             <section className="py-24 lg:py-32 px-6">
                 <div className="max-w-7xl mx-auto">
-                    {/* Back Link */}
                     <Link
                         href="/"
                         className="inline-flex items-center gap-2 text-body mb-12 transition-colors duration-300 hover:gap-3"
@@ -178,47 +75,21 @@ export default function CommissionsPage() {
                         Back to Home
                     </Link>
 
-                    {/* Header */}
                     <div className="max-w-3xl">
-                        <h1
-                            className="text-h1 mb-6"
-                            style={{ color: "var(--charcoal)" }}
-                        >
+                        <h1 className="text-h1 mb-6" style={{ color: "var(--charcoal)" }}>
                             Commission a Drawing
                         </h1>
-                        <p
-                            className="text-body-lg"
-                            style={{ color: "var(--sienna)" }}
-                        >
-                            Transform your memories into lasting art. Each piece
-                            is carefully drawn to capture the soul through the
-                            eyes — where emotion and connection live.
+                        <p className="text-body-lg" style={{ color: "var(--sienna)" }}>
+                            Transform your memories into lasting art. Each piece is carefully drawn to capture the soul through the eyes — where emotion and connection live.
                         </p>
 
-                        {/* Artist Image */}
                         <div className="mt-8 flex items-center gap-4">
-                            <div
-                                className="relative w-16 h-16 rounded-full overflow-hidden shadow-art"
-                                style={{ border: "2px solid var(--sand)" }}
-                            >
-                                <Image
-                                    src="/images/anesu.jpeg"
-                                    alt="Anesu Ndangariro"
-                                    fill
-                                    className="object-cover"
-                                />
+                            <div className="relative w-16 h-16 rounded-full overflow-hidden shadow-art" style={{ border: "2px solid var(--sand)" }}>
+                                <Image src="/images/anesu.jpeg" alt="Anesu Ndangariro" fill className="object-cover" />
                             </div>
                             <div>
-                                <p
-                                    className="text-body font-medium"
-                                    style={{ color: "var(--charcoal)" }}
-                                >
-                                    Anesu Ndangariro
-                                </p>
-                                <p
-                                    className="text-small italic"
-                                    style={{ color: "var(--sienna)" }}
-                                >
+                                <p className="text-body font-medium" style={{ color: "var(--charcoal)" }}>Anesu Ndangariro</p>
+                                <p className="text-small italic" style={{ color: "var(--sienna)" }}>
                                     "With us, Remembrance"
                                 </p>
                             </div>
@@ -227,636 +98,262 @@ export default function CommissionsPage() {
                 </div>
             </section>
 
-            {/* Pricing Packages */}
-            <section
-                className="py-16 lg:py-24 px-6"
-                style={{ backgroundColor: "var(--warm-white)" }}
+            {/* Package grid component */}
+            <PackageGrid packages={commissionPackages} selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} />
+
+            {/* Commission form component */}
+            <CommissionForm selectedPackage={selectedPackage} setSelectedPackage={setSelectedPackage} commissionPackages={commissionPackages} printOptions={printOptions} />
+
+            {/* Process section component */}
+            <ProcessSection />
+        </main>
+    );
+}
+    htmlFor="file-upload"
+    className="cursor-pointer"
+>
+    <Upload
+        className="w-8 h-8 mx-auto mb-2"
+        style={{
+            color: "var(--sienna)",
+        }}
+    />
+    <p
+        className="text-body"
+        style={{
+            color: "var(--charcoal)",
+        }}
+    >
+        {formData.referenceImages
+            ? formData.referenceImages
+                .name
+            : "Click to upload reference photos"}
+    </p>
+    <p
+        className="text-small mt-1"
+        style={{
+            color: "var(--sienna)",
+        }}
+    >
+        JPG, PNG, or PDF
+    </p>
+</label>
+                                    </div >
+                                </div >
+                            </div >
+
+    {/* Selected Package Display */ }
+{
+    selectedPackage && (
+        <div
+            className="p-4 rounded"
+            style={{
+                backgroundColor: "var(--warm-white)",
+                border: "1px solid var(--sand)",
+            }}
+        >
+            <p
+                className="text-small mb-1"
+                style={{ color: "var(--sienna)" }}
             >
-                <div className="max-w-7xl mx-auto">
-                    <h2
-                        className="text-h2 text-center mb-4"
-                        style={{ color: "var(--charcoal)" }}
-                    >
-                        Select Your Package
-                    </h2>
-                    <p
-                        className="text-body text-center mb-12 max-w-2xl mx-auto"
-                        style={{ color: "var(--sienna)" }}
-                    >
-                        Prices include standard framing and international
-                        delivery. Custom requests may adjust pricing.
-                    </p>
+                Selected Package:
+            </p>
+            <p
+                className="text-body font-medium"
+                style={{ color: "var(--charcoal)" }}
+            >
+                {
+                    commissionPackages.find(
+                        (p) => p.id === selectedPackage
+                    )?.size
+                }{" "}
+                —{" "}
+                {
+                    commissionPackages.find(
+                        (p) => p.id === selectedPackage
+                    )?.price
+                }
+            </p>
+        </div>
+    )
+}
 
-                    {/* Package Grid */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6" ref={ref}>
-                        {commissionPackages.map((pkg) => (
-                            <Card
-                                key={pkg.id}
-                                onClick={() => setSelectedPackage(pkg.id)}
-                                className={`cursor-pointer transition-all duration-300 hover:shadow-art-hover hover:-translate-y-1 ${selectedPackage === pkg.id
-                                    ? "ring-2 shadow-art-hover"
-                                    : ""
-                                    }`}
-                                style={{
-                                    borderColor:
-                                        selectedPackage === pkg.id
-                                            ? "var(--ochre)"
-                                            : "var(--sand)",
-                                    backgroundColor: "var(--cream)",
-                                }}
-                                data-scroll-item
-                            >
-                                <CardContent className="p-6 text-center">
-                                    {selectedPackage === pkg.id && (
-                                        <div
-                                            className="w-6 h-6 rounded-full flex items-center justify-center mb-3 mx-auto"
-                                            style={{
-                                                backgroundColor: "var(--ochre)",
-                                            }}
-                                        >
-                                            <Check
-                                                className="w-4 h-4"
-                                                style={{ color: "var(--cream)" }}
-                                            />
-                                        </div>
-                                    )}
-                                    <h3
-                                        className="text-h3 mb-2"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        {pkg.size}
-                                    </h3>
-                                    <p
-                                        className="text-small mb-2"
-                                        style={{ color: "var(--sienna)" }}
-                                    >
-                                        {pkg.dimensions}
-                                    </p>
-                                    <p
-                                        className="text-h2 mb-3"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        ${pkg.price}
-                                    </p>
-                                    <p
-                                        className="text-small"
-                                        style={{
-                                            color: "var(--charcoal)",
-                                            opacity: 0.7,
-                                        }}
-                                    >
-                                        {pkg.subjects}
-                                    </p>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
-                </div>
-            </section>
+{/* Error Message */ }
+{
+    error && (
+        <div
+            className="p-4 rounded text-center"
+            style={{
+                backgroundColor: "#fee2e2",
+                border: "1px solid #fecaca",
+            }}
+        >
+            <p style={{ color: "#991b1b" }}>{error}</p>
+        </div>
+    )
+}
 
-            {/* Commission Form */}
-            <section className="py-16 lg:py-24 px-6">
-                <div className="max-w-3xl mx-auto">
-                    <h2
-                        className="text-h2 mb-8"
-                        style={{ color: "var(--charcoal)" }}
-                    >
-                        Request Your Commission
-                    </h2>
-
-                    {selectedPackage && (
-                        <div
-                            className="mb-8 p-6 rounded"
-                            style={{
-                                backgroundColor: "var(--warm-white)",
-                                borderLeft: "4px solid var(--ochre)",
-                            }}
-                        >
-                            <div className="flex justify-between items-center">
-                                <div>
-                                    <p
-                                        className="text-small"
-                                        style={{ color: "var(--sienna)" }}
-                                    >
-                                        Package Price:
-                                    </p>
-                                    <p
-                                        className="text-h3"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        ${commissionPackages.find((p) => p.id === selectedPackage)?.price || 0}
-                                    </p>
-                                </div>
-                                {selectedPrint && (
-                                    <>
-                                        <div
-                                            className="w-px h-12"
-                                            style={{ backgroundColor: "var(--sand)" }}
-                                        ></div>
-                                        <div>
-                                            <p
-                                                className="text-small"
-                                                style={{ color: "var(--sienna)" }}
-                                            >
-                                                Print Addon:
-                                            </p>
-                                            <p
-                                                className="text-h3"
-                                                style={{ color: "var(--ochre)" }}
-                                            >
-                                                +${printOptions.find((p) => p.id === selectedPrint)?.price || 0}
-                                            </p>
-                                        </div>
-                                    </>
-                                )}
-                                <div
-                                    className="w-px h-12"
-                                    style={{ backgroundColor: "var(--sand)" }}
-                                ></div>
-                                <div>
-                                    <p
-                                        className="text-small"
-                                        style={{ color: "var(--sienna)" }}
-                                    >
-                                        Total:
-                                    </p>
-                                    <p
-                                        className="text-h2 font-bold"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        ${totalPrice}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+{/* Submit Button */ }
+<div className="pt-6">
+    <Button
+        type="submit"
+        disabled={!selectedPackage || loading}
+        className="w-full px-8 py-6 text-body font-medium tracking-wide transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+        style={{
+            backgroundColor: selectedPackage
+                ? "var(--charcoal)"
+                : "var(--sand)",
+            color: "var(--cream)",
+        }}
+    >
+        {loading
+            ? "Sending..."
+            : "Submit Commission Request"}
+    </Button>
+    {!selectedPackage && (
+        <p
+            className="text-small text-center mt-2"
+            style={{ color: "var(--sienna)" }}
+        >
+            Please select a package above
+        </p>
+    )}
+</div>
+                        </form >
                     )}
+                </div >
+            </section >
 
-                    {submitted ? (
+    {/* Process Section */ }
+    < section
+className = "py-24 lg:py-32 px-6"
+style = {{ backgroundColor: "var(--charcoal)" }}
+            >
+    <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-20">
+            <p
+                className="text-small font-semibold uppercase tracking-wide mb-4"
+                style={{ color: "var(--ochre)" }}
+            >
+                How It Works
+            </p>
+            <h2
+                className="text-h1 mb-6"
+                style={{ color: "var(--cream)" }}
+            >
+                The Commission Process
+            </h2>
+            <p
+                className="text-body-lg max-w-2xl mx-auto"
+                style={{ color: "var(--sand)" }}
+            >
+                From your initial vision to the final framed masterpiece, here's how we bring your
+                commission to life through collaboration and careful craftsmanship.
+            </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+                {
+                    step: "1",
+                    title: "Consultation",
+                    desc: "We discuss your vision, story, and preferences in detail. Share reference images, specific poses, backgrounds, or personal significance you'd like incorporated.",
+                },
+                {
+                    step: "2",
+                    title: "Sketch",
+                    desc: "I create an initial concept sketch based on our conversation. You'll review and approve the composition before we proceed to the final drawing.",
+                },
+                {
+                    step: "3",
+                    title: "Creation",
+                    desc: "The detailed drawing process begins. This typically takes 2-4 weeks depending on size and complexity. I use charcoal, pastel, and mixed media.",
+                },
+                {
+                    step: "4",
+                    title: "Delivery",
+                    desc: "Your finished artwork is carefully framed and packaged. We arrange international shipping to your door with full insurance protection.",
+                },
+            ].map((item, index) => (
+                <div
+                    key={item.step}
+                    className="group"
+                    style={{
+                        animation: `fadeInUp 0.8s ease-out ${index * 0.15}s both`,
+                    }}
+                >
+                    <div className="relative h-full">
+                        {/* Step circle */}
                         <div
-                            className="p-8 rounded text-center"
+                            className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
                             style={{
-                                backgroundColor: "var(--warm-white)",
-                                border: "2px solid var(--ochre)",
+                                backgroundColor: "var(--ochre)",
+                                boxShadow: "0 8px 20px rgba(201, 163, 75, 0.3)",
                             }}
                         >
-                            <div
-                                className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
-                                style={{ backgroundColor: "var(--ochre)" }}
-                            >
-                                <Check
-                                    className="w-8 h-8"
-                                    style={{ color: "var(--cream)" }}
-                                />
-                            </div>
-                            <h3
-                                className="text-h3 mb-2"
+                            <span
+                                className="text-h2 font-bold"
                                 style={{ color: "var(--charcoal)" }}
                             >
-                                Request Submitted!
+                                {item.step}
+                            </span>
+                        </div>
+
+                        {/* Content card */}
+                        <div
+                            className="text-center p-6 rounded-lg h-full transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-art-hover"
+                            style={{
+                                backgroundColor: "var(--warm-white)",
+                                borderTop: "3px solid var(--ochre)",
+                            }}
+                        >
+                            <h3
+                                className="text-h3 mb-3 font-semibold"
+                                style={{ color: "var(--charcoal)" }}
+                            >
+                                {item.title}
                             </h3>
                             <p
                                 className="text-body"
                                 style={{ color: "var(--sienna)" }}
                             >
-                                Thank you for your interest. I'll be in touch
-                                within 48 hours to discuss your commission.
+                                {item.desc}
                             </p>
                         </div>
-                    ) : (
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            {/* Personal Information */}
-                            <div className="space-y-4">
-                                <div>
-                                    <label
-                                        className="block text-body font-medium mb-2"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        Full Name *
-                                    </label>
-                                    <Input
-                                        required
-                                        type="text"
-                                        value={formData.name}
-                                        onChange={(e) =>
-                                            setFormData({
-                                                ...formData,
-                                                name: e.target.value,
-                                            })
-                                        }
-                                        className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
-                                        style={{
-                                            borderColor: "var(--sand)",
-                                            color: "var(--charcoal)",
-                                        }}
-                                        placeholder="Your name"
-                                    />
-                                </div>
 
-                                <div>
-                                    <label
-                                        className="block text-body font-medium mb-2"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        Email Address *
-                                    </label>
-                                    <Input
-                                        required
-                                        type="email"
-                                        value={formData.email}
-                                        onChange={(e) =>
-                                            setFormData({
-                                                ...formData,
-                                                email: e.target.value,
-                                            })
-                                        }
-                                        className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
-                                        style={{
-                                            borderColor: "var(--sand)",
-                                            color: "var(--charcoal)",
-                                        }}
-                                        placeholder="your.email@example.com"
-                                    />
-                                </div>
-
-                                <div>
-                                    <label
-                                        className="block text-body font-medium mb-2"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        Phone Number (optional)
-                                    </label>
-                                    <Input
-                                        type="tel"
-                                        value={formData.phone}
-                                        onChange={(e) =>
-                                            setFormData({
-                                                ...formData,
-                                                phone: e.target.value,
-                                            })
-                                        }
-                                        className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
-                                        style={{
-                                            borderColor: "var(--sand)",
-                                            color: "var(--charcoal)",
-                                        }}
-                                        placeholder="+1 (555) 000-0000"
-                                    />
-                                </div>
-                            </div>
-
-                            {/* Commission Details */}
-                            <div className="space-y-4">
-                                <div>
-                                    <label
-                                        className="block text-body font-medium mb-2"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        Animal/Subject *
-                                    </label>
-                                    <Input
-                                        required
-                                        type="text"
-                                        value={formData.animalType}
-                                        onChange={(e) =>
-                                            setFormData({
-                                                ...formData,
-                                                animalType: e.target.value,
-                                            })
-                                        }
-                                        className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
-                                        style={{
-                                            borderColor: "var(--sand)",
-                                            color: "var(--charcoal)",
-                                        }}
-                                        placeholder="e.g., Lion and cub, Elephant pair, etc."
-                                    />
-                                </div>
-
-                                <div>
-                                    <label
-                                        className="block text-body font-medium mb-2"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        Print Type (optional)
-                                    </label>
-                                    <Select value={selectedPrint} onValueChange={setSelectedPrint}>
-                                        <SelectTrigger
-                                            className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
-                                            style={{
-                                                borderColor: "var(--sand)",
-                                                color: "var(--charcoal)",
-                                            }}
-                                        >
-                                            <SelectValue placeholder="Choose a print option..." />
-                                        </SelectTrigger>
-                                        <SelectContent
-                                            style={{
-                                                backgroundColor: "var(--cream)",
-                                                borderColor: "var(--sand)",
-                                            }}
-                                        >
-                                            {printOptions.map((option) => (
-                                                <SelectItem
-                                                    key={option.id}
-                                                    value={option.id}
-                                                    style={{ color: "var(--charcoal)" }}
-                                                >
-                                                    {option.label}
-                                                </SelectItem>
-                                            ))}
-                                        </SelectContent>
-                                    </Select>
-                                </div>
-
-                                <div>
-                                    <label
-                                        className="block text-body font-medium mb-2"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        Message & Details *
-                                    </label>
-                                    <Textarea
-                                        required
-                                        value={formData.message}
-                                        onChange={(e) =>
-                                            setFormData({
-                                                ...formData,
-                                                message: e.target.value,
-                                            })
-                                        }
-                                        rows={6}
-                                        className="!shadow-none !ring-0 focus:!ring-0 focus-visible:!ring-0"
-                                        style={{
-                                            borderColor: "var(--sand)",
-                                            color: "var(--charcoal)",
-                                        }}
-                                        placeholder="Tell me about your vision for this piece. Include any personal significance, specific poses, backgrounds, or messages you'd like incorporated..."
-                                    />
-                                </div>
-
-                                <div>
-                                    <label
-                                        className="block text-body font-medium mb-2"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        Reference Images (optional)
-                                    </label>
-                                    <div
-                                        className="border-2 border-dashed rounded p-8 text-center cursor-pointer transition-colors duration-300 hover:border-opacity-100"
-                                        style={{
-                                            borderColor: "var(--sand)",
-                                            backgroundColor: "var(--warm-white)",
-                                        }}
-                                    >
-                                        <input
-                                            type="file"
-                                            accept="image/*"
-                                            onChange={handleFileChange}
-                                            className="hidden"
-                                            id="file-upload"
-                                        />
-                                        <label
-                                            htmlFor="file-upload"
-                                            className="cursor-pointer"
-                                        >
-                                            <Upload
-                                                className="w-8 h-8 mx-auto mb-2"
-                                                style={{
-                                                    color: "var(--sienna)",
-                                                }}
-                                            />
-                                            <p
-                                                className="text-body"
-                                                style={{
-                                                    color: "var(--charcoal)",
-                                                }}
-                                            >
-                                                {formData.referenceImages
-                                                    ? formData.referenceImages
-                                                        .name
-                                                    : "Click to upload reference photos"}
-                                            </p>
-                                            <p
-                                                className="text-small mt-1"
-                                                style={{
-                                                    color: "var(--sienna)",
-                                                }}
-                                            >
-                                                JPG, PNG, or PDF
-                                            </p>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Selected Package Display */}
-                            {selectedPackage && (
-                                <div
-                                    className="p-4 rounded"
-                                    style={{
-                                        backgroundColor: "var(--warm-white)",
-                                        border: "1px solid var(--sand)",
-                                    }}
-                                >
-                                    <p
-                                        className="text-small mb-1"
-                                        style={{ color: "var(--sienna)" }}
-                                    >
-                                        Selected Package:
-                                    </p>
-                                    <p
-                                        className="text-body font-medium"
-                                        style={{ color: "var(--charcoal)" }}
-                                    >
-                                        {
-                                            commissionPackages.find(
-                                                (p) => p.id === selectedPackage
-                                            )?.size
-                                        }{" "}
-                                        —{" "}
-                                        {
-                                            commissionPackages.find(
-                                                (p) => p.id === selectedPackage
-                                            )?.price
-                                        }
-                                    </p>
-                                </div>
-                            )}
-
-                            {/* Error Message */}
-                            {error && (
-                                <div
-                                    className="p-4 rounded text-center"
-                                    style={{
-                                        backgroundColor: "#fee2e2",
-                                        border: "1px solid #fecaca",
-                                    }}
-                                >
-                                    <p style={{ color: "#991b1b" }}>{error}</p>
-                                </div>
-                            )}
-
-                            {/* Submit Button */}
-                            <div className="pt-6">
-                                <Button
-                                    type="submit"
-                                    disabled={!selectedPackage || loading}
-                                    className="w-full px-8 py-6 text-body font-medium tracking-wide transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
-                                    style={{
-                                        backgroundColor: selectedPackage
-                                            ? "var(--charcoal)"
-                                            : "var(--sand)",
-                                        color: "var(--cream)",
-                                    }}
-                                >
-                                    {loading
-                                        ? "Sending..."
-                                        : "Submit Commission Request"}
-                                </Button>
-                                {!selectedPackage && (
-                                    <p
-                                        className="text-small text-center mt-2"
-                                        style={{ color: "var(--sienna)" }}
-                                    >
-                                        Please select a package above
-                                    </p>
-                                )}
-                            </div>
-                        </form>
-                    )}
-                </div>
-            </section>
-
-            {/* Process Section */}
-            <section
-                className="py-24 lg:py-32 px-6"
-                style={{ backgroundColor: "var(--charcoal)" }}
-            >
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-20">
-                        <p
-                            className="text-small font-semibold uppercase tracking-wide mb-4"
-                            style={{ color: "var(--ochre)" }}
-                        >
-                            How It Works
-                        </p>
-                        <h2
-                            className="text-h1 mb-6"
-                            style={{ color: "var(--cream)" }}
-                        >
-                            The Commission Process
-                        </h2>
-                        <p
-                            className="text-body-lg max-w-2xl mx-auto"
-                            style={{ color: "var(--sand)" }}
-                        >
-                            From your initial vision to the final framed masterpiece, here's how we bring your
-                            commission to life through collaboration and careful craftsmanship.
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {[
-                            {
-                                step: "1",
-                                title: "Consultation",
-                                desc: "We discuss your vision, story, and preferences in detail. Share reference images, specific poses, backgrounds, or personal significance you'd like incorporated.",
-                            },
-                            {
-                                step: "2",
-                                title: "Sketch",
-                                desc: "I create an initial concept sketch based on our conversation. You'll review and approve the composition before we proceed to the final drawing.",
-                            },
-                            {
-                                step: "3",
-                                title: "Creation",
-                                desc: "The detailed drawing process begins. This typically takes 2-4 weeks depending on size and complexity. I use charcoal, pastel, and mixed media.",
-                            },
-                            {
-                                step: "4",
-                                title: "Delivery",
-                                desc: "Your finished artwork is carefully framed and packaged. We arrange international shipping to your door with full insurance protection.",
-                            },
-                        ].map((item, index) => (
+                        {/* Connector line (hidden on mobile) */}
+                        {index < 3 && (
                             <div
-                                key={item.step}
-                                className="group"
-                                style={{
-                                    animation: `fadeInUp 0.8s ease-out ${index * 0.15}s both`,
-                                }}
-                            >
-                                <div className="relative h-full">
-                                    {/* Step circle */}
-                                    <div
-                                        className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg"
-                                        style={{
-                                            backgroundColor: "var(--ochre)",
-                                            boxShadow: "0 8px 20px rgba(201, 163, 75, 0.3)",
-                                        }}
-                                    >
-                                        <span
-                                            className="text-h2 font-bold"
-                                            style={{ color: "var(--charcoal)" }}
-                                        >
-                                            {item.step}
-                                        </span>
-                                    </div>
-
-                                    {/* Content card */}
-                                    <div
-                                        className="text-center p-6 rounded-lg h-full transition-all duration-300 group-hover:-translate-y-2 group-hover:shadow-art-hover"
-                                        style={{
-                                            backgroundColor: "var(--warm-white)",
-                                            borderTop: "3px solid var(--ochre)",
-                                        }}
-                                    >
-                                        <h3
-                                            className="text-h3 mb-3 font-semibold"
-                                            style={{ color: "var(--charcoal)" }}
-                                        >
-                                            {item.title}
-                                        </h3>
-                                        <p
-                                            className="text-body"
-                                            style={{ color: "var(--sienna)" }}
-                                        >
-                                            {item.desc}
-                                        </p>
-                                    </div>
-
-                                    {/* Connector line (hidden on mobile) */}
-                                    {index < 3 && (
-                                        <div
-                                            className="hidden lg:block absolute top-10 -right-6 w-12 h-0.5"
-                                            style={{ backgroundColor: "var(--ochre)", opacity: 0.3 }}
-                                        ></div>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* CTA */}
-                    <div className="text-center mt-16">
-                        <p
-                            className="text-body-lg mb-6"
-                            style={{ color: "var(--sand)" }}
-                        >
-                            Ready to start your commission journey?
-                        </p>
-                        <Button
-                            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                            className="transition-all duration-300 hover:scale-105"
-                            style={{
-                                backgroundColor: "var(--ochre)",
-                                color: "var(--charcoal)",
-                            }}
-                        >
-                            Select Your Package
-                        </Button>
+                                className="hidden lg:block absolute top-10 -right-6 w-12 h-0.5"
+                                style={{ backgroundColor: "var(--ochre)", opacity: 0.3 }}
+                            ></div>
+                        )}
                     </div>
                 </div>
-            </section>
-        </main>
+            ))}
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-16">
+            <p
+                className="text-body-lg mb-6"
+                style={{ color: "var(--sand)" }}
+            >
+                Ready to start your commission journey?
+            </p>
+            <Button
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                className="transition-all duration-300 hover:scale-105"
+                style={{
+                    backgroundColor: "var(--ochre)",
+                    color: "var(--charcoal)",
+                }}
+            >
+                Select Your Package
+            </Button>
+        </div>
+    </div>
+            </section >
+        </main >
     );
 }
