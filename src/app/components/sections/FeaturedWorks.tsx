@@ -82,17 +82,11 @@ export default function FeaturedWorks() {
                 {/* Section Header */}
                 <div className="text-center mb-16">
                     <h2
-                        className="text-caption mb-4"
-                        style={{ color: "var(--sienna)" }}
-                    >
-                        Featured Works
-                    </h2>
-                    <p
                         className="text-h2"
                         style={{ color: "var(--charcoal)" }}
                     >
-                        Selected Pieces
-                    </p>
+                        Gallery
+                    </h2>
                 </div>
 
                 {/* Artwork Grid */}

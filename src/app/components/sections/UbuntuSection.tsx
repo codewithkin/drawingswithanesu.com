@@ -53,7 +53,7 @@ export default function UbuntuSection() {
                                 className="mt-4 text-body italic"
                                 style={{ color: "var(--ochre)" }}
                             >
-                                — Ubuntu
+                             Ubuntu
                             </footer>
                         </blockquote>
 

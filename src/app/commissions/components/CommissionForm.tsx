@@ -84,7 +84,7 @@ export default function CommissionForm({
                 description: "I'll be in touch within 48 hours to discuss your commission.",
                 duration: 5000,
             });
-            
+
             setTimeout(() => {
                 setSubmitted(false);
                 setFormData({ name: "", email: "", phone: "", animalType: "", message: "", referenceImages: null });
