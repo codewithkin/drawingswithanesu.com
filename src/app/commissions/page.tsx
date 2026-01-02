@@ -58,26 +58,61 @@ export default function CommissionsPage() {
         referenceImages: null as File | null,
     });
     const [submitted, setSubmitted] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // In production, this would send data to an API/email service
-        console.log("Commission Request:", { selectedPackage, ...formData });
-        setSubmitted(true);
+        setLoading(true);
+        setError("");
 
-        // Reset after 3 seconds
-        setTimeout(() => {
-            setSubmitted(false);
-            setFormData({
-                name: "",
-                email: "",
-                phone: "",
-                animalType: "",
-                message: "",
-                referenceImages: null,
+        try {
+            // Get the selected package details for the email
+            const pkg = commissionPackages.find((p) => p.id === selectedPackage);
+            const packageDetails = pkg
+                ? `${pkg.size} (${pkg.dimensions}) - ${pkg.price}`
+                : selectedPackage;
+
+            const response = await fetch("/api/commission", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    selectedPackage: packageDetails,
+                }),
             });
-            setSelectedPackage("");
-        }, 3000);
+
+            if (!response.ok) {
+                const data = await response.json();
+                throw new Error(data.error || "Failed to send request");
+            }
+
+            setSubmitted(true);
+
+            // Reset after 5 seconds
+            setTimeout(() => {
+                setSubmitted(false);
+                setFormData({
+                    name: "",
+                    email: "",
+                    phone: "",
+                    animalType: "",
+                    message: "",
+                    referenceImages: null,
+                });
+                setSelectedPackage("");
+            }, 5000);
+        } catch (err) {
+            setError(
+                err instanceof Error
+                    ? err.message
+                    : "Something went wrong. Please try again."
+            );
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -177,8 +212,8 @@ export default function CommissionsPage() {
                                 key={pkg.id}
                                 onClick={() => setSelectedPackage(pkg.id)}
                                 className={`cursor-pointer transition-all duration-300 hover:shadow-art-hover hover:-translate-y-1 ${selectedPackage === pkg.id
-                                        ? "ring-2 shadow-art-hover"
-                                        : ""
+                                    ? "ring-2 shadow-art-hover"
+                                    : ""
                                     }`}
                                 style={{
                                     borderColor:
@@ -298,7 +333,7 @@ export default function CommissionsPage() {
                                                 name: e.target.value,
                                             })
                                         }
-                                        className="bg-transparent border-0 border-b-2 rounded-none px-0 py-3 focus:ring-0 transition-colors duration-300"
+                                        className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
                                         style={{
                                             borderColor: "var(--sand)",
                                             color: "var(--charcoal)",
@@ -324,7 +359,7 @@ export default function CommissionsPage() {
                                                 email: e.target.value,
                                             })
                                         }
-                                        className="bg-transparent border-0 border-b-2 rounded-none px-0 py-3 focus:ring-0 transition-colors duration-300"
+                                        className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
                                         style={{
                                             borderColor: "var(--sand)",
                                             color: "var(--charcoal)",
@@ -349,7 +384,7 @@ export default function CommissionsPage() {
                                                 phone: e.target.value,
                                             })
                                         }
-                                        className="bg-transparent border-0 border-b-2 rounded-none px-0 py-3 focus:ring-0 transition-colors duration-300"
+                                        className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
                                         style={{
                                             borderColor: "var(--sand)",
                                             color: "var(--charcoal)",
@@ -378,7 +413,7 @@ export default function CommissionsPage() {
                                                 animalType: e.target.value,
                                             })
                                         }
-                                        className="bg-transparent border-0 border-b-2 rounded-none px-0 py-3 focus:ring-0 transition-colors duration-300"
+                                        className="!border-0 !border-b-2 !rounded-none !shadow-none !ring-0 focus:!ring-0 focus:!border-b-2 focus-visible:!ring-0"
                                         style={{
                                             borderColor: "var(--sand)",
                                             color: "var(--charcoal)",
@@ -404,7 +439,7 @@ export default function CommissionsPage() {
                                             })
                                         }
                                         rows={6}
-                                        className="bg-transparent border-2 rounded px-4 py-3 focus:ring-0 transition-colors duration-300"
+                                        className="!shadow-none !ring-0 focus:!ring-0 focus-visible:!ring-0"
                                         style={{
                                             borderColor: "var(--sand)",
                                             color: "var(--charcoal)",
@@ -502,11 +537,24 @@ export default function CommissionsPage() {
                                 </div>
                             )}
 
+                            {/* Error Message */}
+                            {error && (
+                                <div
+                                    className="p-4 rounded text-center"
+                                    style={{
+                                        backgroundColor: "#fee2e2",
+                                        border: "1px solid #fecaca",
+                                    }}
+                                >
+                                    <p style={{ color: "#991b1b" }}>{error}</p>
+                                </div>
+                            )}
+
                             {/* Submit Button */}
                             <div className="pt-6">
                                 <Button
                                     type="submit"
-                                    disabled={!selectedPackage}
+                                    disabled={!selectedPackage || loading}
                                     className="w-full px-8 py-6 text-body font-medium tracking-wide transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                                     style={{
                                         backgroundColor: selectedPackage
@@ -515,7 +563,9 @@ export default function CommissionsPage() {
                                         color: "var(--cream)",
                                     }}
                                 >
-                                    Submit Commission Request
+                                    {loading
+                                        ? "Sending..."
+                                        : "Submit Commission Request"}
                                 </Button>
                                 {!selectedPackage && (
                                     <p
